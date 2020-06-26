@@ -10,6 +10,7 @@ class ListItem extends Component {
 
         return (
             <tr>
+                <td>{isArchive ? 'true' : 'false'}</td>
                 <td>{name}</td>
                 <td>{birthday}</td>
                 <td>{role}</td>

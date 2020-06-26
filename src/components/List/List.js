@@ -7,19 +7,29 @@ class List extends Component {
     componentDidMount() {
         this.props.dispatch(fetchItems());
 
-        console.log(this.props);
+        console.log('THIS_PROPS', this.props);
     }
 
     render() {
 
-        const { items, loading } = this.props.items;
+        const { loading, items, filteredItems } = this.props;
+
 
         const renderItems = () => {
-            return items.map(el => {
-                return (
-                    <ListItem key={el.id} props={el}/>
-                );
-            })
+            if (filteredItems.length > 0) {
+                return filteredItems.map(el => {
+                    return (
+                        <ListItem key={el.id} props={el}/>
+                    );
+                })
+            } else {
+                return items.map(el => {
+                    return (
+                        <ListItem key={el.id} props={el}/>
+                    );
+                })
+            }
+
         };
 
         if (loading) {
@@ -27,7 +37,7 @@ class List extends Component {
         }
 
       return (
-          <tbody className="container">
+          <tbody>
               {renderItems()}
           </tbody>
       );
@@ -36,7 +46,9 @@ class List extends Component {
 
 const mapStateToProps = state => {
     return {
-        items: state.items,
+        items: state.itemsStorage.items,
+        filteredItems: state.itemsStorage.filteredItems,
+        loading: state.itemsStorage.loading
     }
 };
 

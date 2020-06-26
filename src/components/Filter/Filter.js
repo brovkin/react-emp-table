@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { filteredSelect, filteredCheckbox } from "../../redux/actions/items";
 
 class Filter extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event) {
-        console.log(event.target.value);
-        this.props.filteredSelect(event.target.value);
+    componentDidMount() {
+        filteredSelect('test')
     }
 
     render() {
         return (
             <div>
-                test
-                <select value={this.props.selectValue} style={{display: 'block'}} className="input-field" onChange={this.handleChange}>
+                <select
+                        style={{display: 'block'}}
+                        value={this.props.selectValue}
+                        className="input-field"
+                        onChange={(event) => this.props.dispatch(filteredSelect(event))}>
+                    <option value="">Все должности</option>
                     <option value="cook">Повар</option>
                     <option value="driver">Водитель</option>
                     <option value="waiter">Официант</option>
                 </select>
+                <label>
+                    <input
+                        type="checkbox"
+                        className="filled-in"
+                        onChange={(event) => this.props.dispatch(filteredCheckbox(event))}/>
+                    <span>В архиве</span>
+                </label>
             </div>
         );
     }
@@ -30,14 +35,9 @@ class Filter extends Component {
 
 const mapStateToProps = state => {
     return {
-        items: state.items
+        items: state.items,
+        selectValue: state.selectValue
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        filteredSelect: (value) => dispatch({type: 'FILTERED_SELECT', payload: value})
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps)(Filter);

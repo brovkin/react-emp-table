@@ -2,14 +2,19 @@ import {
     FETCH_ITEMS_BEGIN,
     FETCH_ITEMS_SUCCESS,
     SORTED_ITEMS_BY,
-    FILTERED_SELECT,
+    FILTERED_SELECT, FILTERED_CHECKBOX,
 } from "../actions/items";
 import { sortBy } from 'lodash'
 
 const initialState = {
     items: [],
+    filteredItems: [],
     loading: false,
-    selectValue: ''
+    selectValue: '',
+    filter: {
+        role: '',
+        isArchive: null
+    }
 };
 
 export default function itemsReducer(state = initialState, action) {
@@ -24,7 +29,7 @@ export default function itemsReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                items: action.payload.items,
+                items: action.items
             };
         case SORTED_ITEMS_BY:
             console.log(action, state);
@@ -35,11 +40,34 @@ export default function itemsReducer(state = initialState, action) {
             };
         case FILTERED_SELECT:
             console.log('FILTERED', action, state);
+
             return {
                 ...state,
-                loading: false,
-                items: state.items.filter(i => i.role === action.payload)
+                filter: action.value,
+                filteredItems: state.items.filter(item => {
+                    if (action.value.isArchive) {
+                        return item.role === action.value.role && item.isArchive;
+                    } else {
+                        return item.role === action.value.role;
+                    }
+                })
             };
+        case FILTERED_CHECKBOX:
+            console.log(action.value);
+            console.log(state);
+
+            return {
+                ...state,
+                filter: action.value,
+                filteredItems: state.items.filter(item => {
+                    if (action.value.isArchive) {
+                        return (item.role === action.value.role || !action.value.role) && item.isArchive;
+                    } else {
+                        return item.role === action.value.role || !action.value.role === '';
+                    }
+                })
+            };
+
         default:
             return state;
     }

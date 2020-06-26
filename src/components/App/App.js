@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Filter from '../Filter/Filter';
 import List from "../List/List";
@@ -13,6 +13,7 @@ class App extends Component {
                 <table className="responsive-table highlight">
                     <thead>
                         <tr>
+                            <th>isArchive</th>
                             <th onClick={() => this.props.sortedItems('name')}>Имя</th>
                             <th onClick={() => this.props.sortedItems('birthday')}>Дата рождения</th>
                             <th>Должность</th>
@@ -28,7 +29,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
     return {
-        items: state.items
+       state
     }
 };
 
