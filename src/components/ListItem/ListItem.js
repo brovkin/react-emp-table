@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 class ListItem extends Component {
 
@@ -10,11 +9,11 @@ class ListItem extends Component {
 
         return (
             <tr>
-                <td>{isArchive ? 'true' : 'false'}</td>
-                <td>{name}</td>
-                <td>{birthday}</td>
-                <td>{role}</td>
-                <td>{phone}</td>
+                <td> {isArchive ? 'true' : 'false'} </td>
+                <td> {name} </td>
+                <td> {birthday} </td>
+                <td> {role} </td>
+                <td> {phone} </td>
             </tr>
         );
     }

@@ -6,6 +6,13 @@ export const SORTED_ITEMS_BY = 'SORTED_ITEMS_BY';
 export const FILTERED_SELECT = 'FILTERED_SELECT';
 export const FILTERED_CHECKBOX = 'FILTERED_CHECKBOX';
 
+export const SUBMIT_FORM = 'SUBMIT_FORM';
+
+export const submitForm = user => ({
+    type: SUBMIT_FORM,
+    user
+});
+
 export const fetchItemsBegin = () => ({
     type: FETCH_ITEMS_BEGIN
 });
@@ -13,6 +20,11 @@ export const fetchItemsBegin = () => ({
 export const fetchItemsSuccess = items => ({
     type: FETCH_ITEMS_SUCCESS,
     items
+});
+
+export const sortedItems = column => ({
+    type: SORTED_ITEMS_BY,
+    column
 });
 
 export const filteredSelectSuccess = value => ({
@@ -26,10 +38,10 @@ export const filteredCheckboxSuccess = value => ({
 });
 
 export function fetchItems() {
-    return async dispatch => {
+    return dispatch => {
         dispatch(fetchItemsBegin());
 
-        await setTimeout(() => {
+        setTimeout(() => {
 
         return dispatch(fetchItemsSuccess(itemsFromFile));
         }, 1500);

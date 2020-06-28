@@ -2,7 +2,7 @@ import {
     FETCH_ITEMS_BEGIN,
     FETCH_ITEMS_SUCCESS,
     SORTED_ITEMS_BY,
-    FILTERED_SELECT, FILTERED_CHECKBOX,
+    FILTERED_SELECT, FILTERED_CHECKBOX, SUBMIT_FORM,
 } from "../actions/items";
 import { sortBy } from 'lodash'
 
@@ -14,6 +14,14 @@ const initialState = {
     filter: {
         role: '',
         isArchive: null
+    },
+    newUser: {
+        id: 18,
+        name: '',
+        phone: '',
+        role: '',
+        birthday: '',
+        inArchive: false
     }
 };
 
@@ -32,7 +40,6 @@ export default function itemsReducer(state = initialState, action) {
                 items: action.items
             };
         case SORTED_ITEMS_BY:
-            console.log(action, state);
             return {
                 ...state,
                 loading: false,
@@ -66,6 +73,13 @@ export default function itemsReducer(state = initialState, action) {
                         return item.role === action.value.role || !action.value.role === '';
                     }
                 })
+            };
+        case SUBMIT_FORM:
+            console.log('test', state);
+            console.log('test', action.user);
+            return {
+                ...state,
+                items: [...state.items, {id: state.items.length + 1,...action.user}]
             };
 
         default:

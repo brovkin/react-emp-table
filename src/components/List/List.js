@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ListItem from '../ListItem/ListItem';
 import { fetchItems } from "../../redux/actions/items";
 import { connect } from 'react-redux';
@@ -6,14 +6,11 @@ import { connect } from 'react-redux';
 class List extends Component {
     componentDidMount() {
         this.props.dispatch(fetchItems());
-
-        console.log('THIS_PROPS', this.props);
     }
 
     render() {
 
         const { loading, items, filteredItems } = this.props;
-
 
         const renderItems = () => {
             if (filteredItems.length > 0) {
@@ -38,7 +35,7 @@ class List extends Component {
 
       return (
           <tbody>
-              {renderItems()}
+              { renderItems() }
           </tbody>
       );
     }
