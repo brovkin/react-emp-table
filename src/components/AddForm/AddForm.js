@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { submitForm } from "../../redux/actions/items";
+import {filteredCheckbox, submitForm} from "../../redux/actions/items";
+import InputMask from 'react-input-mask';
 import DatePicker from "react-datepicker";
 import ru from 'date-fns/locale/ru';
-import { parseISO } from 'date-fns';
 import "react-datepicker/dist/react-datepicker.css";
+import './AddForm.css';
 
 class AddForm extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       name: '',
       phone: '',
@@ -21,8 +21,7 @@ class AddForm extends Component {
     };
 
     this.redirect = false;
-
-
+    
   }
 
   handleSubmit = (event) => {
@@ -73,21 +72,22 @@ class AddForm extends Component {
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Добавить сотрудника</h3>
+      <form className="add-form" onSubmit={this.handleSubmit}>
+        <h3 className="add-form__title">Добавить сотрудника</h3>
+        <fieldset className="form-group">
           <div className="row">
-            <div className="col s6">
-              <input value={this.state.name} placeholder="Имя" type="text" onChange={this.handleChangeName.bind(this)}/>
+            <div className="col-md-6">
+              <input className="form-control" value={this.state.name} placeholder="Имя" type="text" onChange={this.handleChangeName.bind(this)}/>
             </div>
           </div>
           <div className="row">
-            <div className="col s6">
-              <input value={this.state.phone} placeholder="Телефон" type="text" onChange={this.handleChangePhone.bind(this)}/>
+            <div className="col-md-6">
+              <InputMask className="form-control" mask="+7 (999) 999-9999" value={this.state.phone} placeholder="Телефон" type="text" onChange={this.handleChangePhone.bind(this)}/>
             </div>
           </div>
           <div className="row">
-            <div className="col s6">
-              <select value={this.state.role} className="browser-default" onChange={this.handleSelectRole.bind(this)}>
+            <div className="col-md-6">
+              <select  value={this.state.role} className="form-control" onChange={this.handleSelectRole.bind(this)}>
                 <option value="cook">Повар</option>
                 <option value="driver">Водитель</option>
                 <option value="waiter">Официант</option>
@@ -95,32 +95,33 @@ class AddForm extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col s6">
+            <div className="col-md-6">
               <DatePicker
                 locale={ru}
                 selected={this.state.birthday}
                 onChange={this.handleChangeBirthday}
                 placeholderText="Дата рождения"
                 dateFormat="dd.MM.yyyy"
+                className="form-control"
               />
             </div>
           </div>
           <div className="row">
-            <div className="col s6">
-              <label>
-                <input value={this.state.isArchive} onChange={this.handleChangeCheckbox.bind(this)} type="checkbox" className="filled-in"/>
-                <span>В архиве</span>
-              </label>
+            <div className="form-group col-md-3">
+              <input value={this.state.isArchive}
+                     onChange={this.handleChangeCheckbox.bind(this)}
+                     type="checkbox" className="add-form__checkbox"/>
+              <label className="form-check-label" htmlFor="checkbox">В архиве</label>
             </div>
           </div>
-        <button type="submit">Добавить</button>
+        <button type="submit" className="btn btn-dark text-white">Добавить</button>
+        </fieldset>
       </form>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log('STATE', state);
   return {
     items: state.itemsStorage.items,
   }

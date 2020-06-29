@@ -1,4 +1,8 @@
-.app__table {
+.main-table {
+    height: 500px;
+}
+
+.app__wrapper {
     margin: 20px auto;
-    width: 1200px;
+    max-width: 1200px;
 }

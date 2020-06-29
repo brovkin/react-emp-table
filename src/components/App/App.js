@@ -3,10 +3,12 @@ import {BrowserRouter as Router, Link, Route, Switch, useHistory} from 'react-ro
 import './App.css';
 import Filter from '../Filter/Filter';
 import AddForm from '../AddForm/AddForm';
+import EditForm from "../EditForm/EditForm";
 import Table from '../Table/Table';
-import List from "../List/List";
+import NavBar from "../NavBar/NavBar";
 import { connect } from 'react-redux';
 import {fetchItems} from "../../redux/actions/items";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
@@ -16,22 +18,22 @@ class App extends Component {
 
     render() {
         return (
-            <div className="app__table">
+
+            <div className="app__wrapper">
+                <h1 className="app__title">Сотрудники компании</h1>
                 <Router>
-                    <Link to="/">На главную</Link>
-                    <Link to="/add">Добавить</Link>
-                    <Link to="/edit">Редактировать</Link>
+                    <NavBar/>
                     <Switch>
                         <Route exact path="/">
                             <Filter/>
-                            <Table/>
+                            <div className="main-table table-responsive">
+                                <Table/>
+                            </div>
                         </Route>
                         <Route path="/add">
                             <AddForm/>
                         </Route>
-                        <Route path="/edit">
-                            <h1>Edit</h1>
-                        </Route>
+                        <Route path="/edit/:id" component={EditForm}/>
                     </Switch>
                 </Router>
             </div>

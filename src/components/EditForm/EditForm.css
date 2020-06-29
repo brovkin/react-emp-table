@@ -1,0 +1,19 @@
+.edit-form__title {
+    margin: 1rem 0;
+    font-weight: 300;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.edit-form .form-control {
+    margin-bottom: 1rem;
+}
+
+.edit-form .form-control:focus {
+    box-shadow: none;
+}
+
+.edit-form__checkbox {
+    margin-right: .5rem;
+}
