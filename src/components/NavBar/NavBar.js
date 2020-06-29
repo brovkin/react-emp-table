@@ -10,7 +10,5 @@ export default props => {
       <NavLink className="btn" activeClassName="btn-success" to="/add/">Добавить сотрудника</NavLink>
     </nav>
 
-
-
   );
 }

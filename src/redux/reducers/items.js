@@ -94,7 +94,6 @@ export default function itemsReducer(state = initialState, action) {
                 ...state,
                 items: state.items.map(item => item.id === action.user.id ? {...action.user} : item),
                 filteredItems: state.filteredItems.map(item => item.id === action.user.id ? {...action.user} : item),
-                // filter: state.filter
             }
 
         default:

@@ -21,7 +21,7 @@ class AddForm extends Component {
     };
 
     this.redirect = false;
-    
+
   }
 
   handleSubmit = (event) => {
@@ -108,10 +108,11 @@ class AddForm extends Component {
           </div>
           <div className="row">
             <div className="form-group col-md-3">
-              <input value={this.state.isArchive}
+              <input checked={this.state.isArchive}
+                     id="checkbox-add"
                      onChange={this.handleChangeCheckbox.bind(this)}
                      type="checkbox" className="add-form__checkbox"/>
-              <label className="form-check-label" htmlFor="checkbox">В архиве</label>
+              <label className="form-check-label" htmlFor="checkbox-add">В архиве</label>
             </div>
           </div>
         <button type="submit" className="btn btn-dark text-white">Добавить</button>

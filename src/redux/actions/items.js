@@ -1,5 +1,4 @@
 import itemsFromFile from '../../assets/employees';
-import items from "../reducers/items";
 
 export const FETCH_ITEMS_BEGIN = 'FETCH_ITEMS_BEGIN';
 export const FETCH_ITEMS_SUCCESS = 'FETCH_ITEMS_SUCCESS';
